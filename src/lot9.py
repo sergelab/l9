@@ -61,18 +61,18 @@ def process(events, fname):
 
     with open(out_fname, 'w') as out_file:
         with open(fname, 'r') as in_f:
-            test_i = 1
+            # test_i = 1
 
             for line in in_f.readlines():
-                if test_i > 10:
-                    break
+                # if test_i > 10:
+                #     break
 
                 rs = find_event(events, line, process_date)
                 if rs:
                     # Пишем в выходной файл
                     out_file.write(f'{json.dumps(rs)}\n')
 
-                test_i += 1
+                # test_i += 1
 
     print(f'Done')
 
