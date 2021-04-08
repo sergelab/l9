@@ -6,8 +6,6 @@ from pathlib import Path
 
 BASE_DIR = os.path.join(os.path.dirname(__file__), 'lot9')
 
-SPLIT_SYMBOL = ' '  # '\t'
-
 
 # API
 
@@ -70,9 +68,6 @@ def find_event(line, dt):
                 for k, v in b.items():
                     in_attrs.append(k)
 
-            # print('Ready attrs names ', in_attrs)
-            # print('Found ', found)
-
             res_data = {
                 'type': event['id'],
                 'dateTime': dt.strftime('%Y-%m-%d %H:%M:%S')
@@ -93,22 +88,24 @@ def process(fname):
     print(f'Processing {fname}')
 
     process_date = datetime.now()
-
     out_fname = os.path.join(BASE_DIR, 'target', os.path.basename(fname))
 
     with open(out_fname, 'w') as out_file:
         with open(fname, 'r') as in_f:
-            test_i = 1
+            # test_i = 1
 
             for line in in_f.readlines():
-                if test_i > 10:
-                    break
+                # if test_i > 10:
+                #     break
 
                 rs = find_event(line, process_date)
                 if rs:
                     # Пишем в выходной файл
                     out_file.write(f'{json.dumps(rs)}\n')
-                test_i += 1
+
+                # test_i += 1
+
+    print(f'Done')
 
 
 def run():
